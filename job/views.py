@@ -43,3 +43,7 @@ class JobDetailView(generics.RetrieveUpdateDestroyAPIView):
             return Response(status=status.HTTP_404_NOT_FOUND)
         serializer = JobSerializer(queryset, many=False)
         return Response(serializer.data)
+
+class SeekerJobListView(generics.ListAPIView):
+    serializer_class = JobSerializer
+    queryset = Jobs.objects.all()
