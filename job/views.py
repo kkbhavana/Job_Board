@@ -1,9 +1,9 @@
 from django.shortcuts import render
-from rest_framework import generics, status
+from rest_framework import generics, status, filters
 from rest_framework.response import Response
 
-from .models import Jobs
-from .serializer import JobSerializer
+from .models import Jobs, ApplicationForm
+from .serializer import JobSerializer, ApplicationFormSerializer
 
 
 # Create your views here.
@@ -47,3 +47,20 @@ class JobDetailView(generics.RetrieveUpdateDestroyAPIView):
 class SeekerJobListView(generics.ListAPIView):
     serializer_class = JobSerializer
     queryset = Jobs.objects.all()
+
+
+class ApplicationListCreateView(generics.ListCreateAPIView):
+    serializer_class = ApplicationFormSerializer
+    queryset = ApplicationForm.objects.all()
+
+    def list(self, request):
+        queryset= self.get_queryset()
+        serializer = ApplicationFormSerializer(queryset,many=True)
+        return Response(serializer.data)
+
+
+class SearchJobView(generics.ListAPIView):
+    queryset = Jobs.objects.all()
+    serializer_class = JobSerializer
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['title','places']
