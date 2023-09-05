@@ -1,9 +1,12 @@
 from django.shortcuts import render
-from rest_framework import generics, status, filters
+
+from rest_framework import generics, status, filters, permissions
+from rest_framework.authtoken.admin import User
 from rest_framework.response import Response
 
 from .models import Jobs, ApplicationForm
 from .serializer import JobSerializer, ApplicationFormSerializer
+
 
 
 # Create your views here.
@@ -12,8 +15,10 @@ from .serializer import JobSerializer, ApplicationFormSerializer
 # Employer Section:
 
 class JobListCreateView(generics.ListCreateAPIView):
+    # permission_classes = [permissions.IsAuthenticated&IsEmployer]
     serializer_class = JobSerializer
     queryset = Jobs.objects.all()
+
 
     def list(self, request):
         queryset = self.get_queryset()
@@ -22,11 +27,13 @@ class JobListCreateView(generics.ListCreateAPIView):
 
 
 class JobUpdateView(generics.UpdateAPIView):
+    # permission_classes = [permissions.IsAuthenticated&IsEmployer]
     serializer_class = JobSerializer
     queryset = Jobs.objects.all()
 
 
 class JobDeleteView(generics.DestroyAPIView):
+    # permission_classes = [permissions.IsAuthenticated&IsEmployer]
     serializer_class = JobSerializer
     queryset = Jobs.objects.all()
 
@@ -34,6 +41,7 @@ class JobDeleteView(generics.DestroyAPIView):
 # Job seeker section
 
 class JobDetailView(generics.RetrieveUpdateDestroyAPIView):
+    # permission_classes = [permissions.IsAuthenticated]
     serializer_class = JobSerializer
     queryset = Jobs.objects.all()
 
@@ -45,13 +53,16 @@ class JobDetailView(generics.RetrieveUpdateDestroyAPIView):
         return Response(serializer.data)
 
 class SeekerJobListView(generics.ListAPIView):
+    # permission_classes = [permissions.IsAuthenticated]
     serializer_class = JobSerializer
     queryset = Jobs.objects.all()
 
 
 class ApplicationListCreateView(generics.ListCreateAPIView):
+    # permission_classes = [permissions.IsAuthenticated]
     serializer_class = ApplicationFormSerializer
     queryset = ApplicationForm.objects.all()
+
 
     def list(self, request):
         queryset= self.get_queryset()
@@ -60,7 +71,10 @@ class ApplicationListCreateView(generics.ListCreateAPIView):
 
 
 class SearchJobView(generics.ListAPIView):
+    # permission_classes = [permissions.IsAuthenticated]
     queryset = Jobs.objects.all()
     serializer_class = JobSerializer
     filter_backends = [filters.SearchFilter]
     search_fields = ['title','places']
+
+
