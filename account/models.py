@@ -6,6 +6,7 @@ from django.dispatch import receiver
 
 from rest_framework.authtoken.models import Token
 
+
 class User(AbstractUser):
     is_employer = models.BooleanField(default=False)
     is_jobseeker = models.BooleanField(default=False)
@@ -13,21 +14,19 @@ class User(AbstractUser):
     def __str__(self):
         return self.username
 
-@receiver(post_save,sender=settings.AUTH_USER_MODEL)
-def create_auth_token(sender,instance=None,created=False,**kwargs):
+
+@receiver(post_save, sender=settings.AUTH_USER_MODEL)
+def create_auth_token(sender, instance=None, created=False, **kwargs):
     if created:
         Token.objects.create(user=instance)
-
-
-
 
 
 class Employer(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     about = models.TextField()
-    company_name = models.CharField(max_length=300,null=True,blank=True)
-    location = models.CharField(max_length=300,null=True,blank=True)
-    current_job = models.CharField(max_length=250,null=True,blank=True)
+    company_name = models.CharField(max_length=300, null=True, blank=True)
+    location = models.CharField(max_length=300, null=True, blank=True)
+    current_job = models.CharField(max_length=250, null=True, blank=True)
 
     def __str__(self):
         return self.company_name
@@ -49,7 +48,7 @@ class Specialization(models.Model):
 
 class Jobseeker(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
-    qulification = models.ForeignKey(Qulification, on_delete=models.CASCADE, related_name='education',null=True)
+    qulification = models.ForeignKey(Qulification, on_delete=models.CASCADE, related_name='education', null=True)
     date_of_passout = models.DateField(null=True)
     specializations = models.ForeignKey(Specialization, on_delete=models.CASCADE, related_name='course_list',
                                         null=True)
