@@ -29,7 +29,7 @@ class Employer(models.Model):
     current_job = models.CharField(max_length=250, null=True, blank=True)
 
     def __str__(self):
-        return self.company_name
+        return self.user.username
 
 
 class Qulification(models.Model):
@@ -57,4 +57,4 @@ class Jobseeker(models.Model):
     skills = models.TextField()
 
     def __str__(self):
-        return self.about
+        return self.user.username

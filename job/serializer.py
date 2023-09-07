@@ -8,7 +8,8 @@ class JobSerializer(serializers.ModelSerializer):
         model = Jobs
         fields = "__all__"
 
+
 class ApplicationFormSerializer(serializers.ModelSerializer):
     class Meta:
-        model= ApplicationForm
+        model = ApplicationForm
         fields = '__all__'

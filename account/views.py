@@ -5,8 +5,10 @@ from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
+from .models import Employer
 from .permission import IsEmployer, IsJobseeker
-from .serializers import EmpoloyerRegisterSerializer, UserSerializer, JobseekerRegisterSerializer
+from .serializers import EmpoloyerRegisterSerializer, UserSerializer, JobseekerRegisterSerializer, EmployerSerializer, \
+    Jobseeker, JobseekerSerializer
 
 
 # Create your views here.
@@ -72,3 +74,38 @@ class JobseekerOnlyView(generics.RetrieveAPIView):
 
     def get_object(self):
         return self.request.user
+
+
+# profile section:
+
+class EmployerProfileView(generics.ListCreateAPIView):
+    permission_classes = [permissions.IsAuthenticated & IsEmployer]
+    serializer_class = EmployerSerializer
+    queryset = Employer.objects.all()
+
+    def list(self, request):
+        queryset = self.get_queryset()
+        serializer = EmployerSerializer(queryset, many=True)
+        return Response(serializer.data)
+
+
+class EmployerProfileUpdateView(generics.UpdateAPIView):
+    permission_classes = [permissions.IsAuthenticated & IsEmployer]
+    serializer_class = EmployerSerializer
+    queryset = Employer.objects.all()
+
+
+class JobseekerProfileView(generics.ListCreateAPIView):
+    # permission_classes = [permissions.IsAuthenticated & IsJobseeker]
+    serializer_class = JobseekerSerializer
+    queryset = Jobseeker.objects.all()
+
+    def list(self, request):
+        queryset = self.get_queryset()
+        serializer = JobseekerSerializer(queryset, many=True)
+        return Response(serializer.data)
+
+
+class JobseekerProfileUpdateView(generics.UpdateAPIView):
+    serializer_class = JobseekerSerializer
+    queryset = Jobseeker.objects.all()
