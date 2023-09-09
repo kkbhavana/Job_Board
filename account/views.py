@@ -96,7 +96,7 @@ class EmployerProfileUpdateView(generics.UpdateAPIView):
 
 
 class JobseekerProfileView(generics.ListCreateAPIView):
-    # permission_classes = [permissions.IsAuthenticated & IsJobseeker]
+    permission_classes = [permissions.IsAuthenticated & IsJobseeker]
     serializer_class = JobseekerSerializer
     queryset = Jobseeker.objects.all()
 

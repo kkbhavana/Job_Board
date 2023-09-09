@@ -14,7 +14,7 @@ from account.permission import IsEmployer, IsJobseeker
 # Employer Section:
 
 class JobListCreateView(generics.ListCreateAPIView):
-    permission_classes = [permissions.IsAuthenticated & IsEmployer]
+    # permission_classes = [permissions.IsAuthenticated & IsEmployer]
     serializer_class = JobSerializer
     queryset = Jobs.objects.all()
 
