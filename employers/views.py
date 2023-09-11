@@ -4,8 +4,8 @@ from rest_framework.response import Response
 from .models import Jobs
 from .serializer import JobSerializer
 from account.permission import IsEmployer
-
-
+from account.serializers import EmployerSerializer
+from account.models import Employer
 # Create your views here.
 class JobListCreateView(generics.ListCreateAPIView):
     # permission_classes = [permissions.IsAuthenticated & IsEmployer]

@@ -8,7 +8,8 @@ from employers.serializer import JobSerializer
 from employers.models import Jobs
 from jobseeker.models import ApplicationForm
 from jobseeker.serializer import ApplicationFormSerializer
-
+from account.serializers import JobseekerSerializer
+from account.models import Jobseeker
 
 # Create your views here.
 class JobDetailView(generics.RetrieveUpdateDestroyAPIView):
@@ -50,7 +51,7 @@ class SearchJobView(generics.ListAPIView):
 
 
 class JobseekerProfileView(generics.ListCreateAPIView):
-    permission_classes = [permissions.IsAuthenticated & IsJobseeker]
+    # permission_classes = [permissions.IsAuthenticated & IsJobseeker]
     serializer_class = JobseekerSerializer
     queryset = Jobseeker.objects.all()
 

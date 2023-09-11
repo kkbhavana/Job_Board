@@ -5,11 +5,9 @@ from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from .models import Employer
-from .permission import IsEmployer, IsJobseeker
-from .serializers import EmpoloyerRegisterSerializer, UserSerializer, JobseekerRegisterSerializer, EmployerSerializer, \
-    Jobseeker, JobseekerSerializer
 
+from .permission import IsEmployer, IsJobseeker
+from .serializers import EmpoloyerRegisterSerializer, UserSerializer, JobseekerRegisterSerializer
 
 # Create your views here.
 
