@@ -89,7 +89,7 @@ WSGI_APPLICATION = 'jobboard.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'job-board',
+        'NAME': 'job_board',
         'USER': 'postgres',
         'PASSWORD': 'bhavana123',
         'HOST': 'localhost',

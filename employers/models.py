@@ -8,7 +8,7 @@ class Jobs(models.Model):
     description = models.TextField()
     skills = models.CharField(max_length=400)
     places = models.CharField(max_length=250)
-    salary = models.DecimalField(max_digits=10, decimal_places=3)
+    salary = models.CharField(max_length=200)
 
     def __str__(self):
         return self.title

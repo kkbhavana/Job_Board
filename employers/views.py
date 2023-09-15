@@ -31,7 +31,7 @@ class JobDeleteView(generics.DestroyAPIView):
 
 
 class EmployerProfileView(generics.ListCreateAPIView):
-    permission_classes = [permissions.IsAuthenticated & IsEmployer]
+    # permission_classes = [permissions.IsAuthenticated & IsEmployer]
     serializer_class = EmployerSerializer
     queryset = Employer.objects.all()
 
@@ -41,7 +41,7 @@ class EmployerProfileView(generics.ListCreateAPIView):
         return Response(serializer.data)
 
 
-class EmployerProfileUpdateView(generics.UpdateAPIView):
-    permission_classes = [permissions.IsAuthenticated & IsEmployer]
+class EmployerProfileUpdateView(generics.RetrieveUpdateAPIView):
+    # permission_classes = [permissions.IsAuthenticated & IsEmployer]
     serializer_class = EmployerSerializer
     queryset = Employer.objects.all()

@@ -23,7 +23,7 @@ def create_auth_token(sender, instance=None, created=False, **kwargs):
 
 class Employer(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
-    about = models.TextField()
+    about = models.TextField(max_length=1500)
     company_name = models.CharField(max_length=300, null=True, blank=True)
     location = models.CharField(max_length=300, null=True, blank=True)
     current_job = models.CharField(max_length=250, null=True, blank=True)
@@ -53,8 +53,8 @@ class Jobseeker(models.Model):
     specializations = models.ForeignKey(Specialization, on_delete=models.CASCADE, related_name='course_list',
                                         null=True)
     resume = models.FileField()
-    about = models.TextField()
-    skills = models.TextField()
+    about = models.TextField(max_length=500)
+    skills = models.TextField(max_length=500)
 
     def __str__(self):
         return self.user.username
