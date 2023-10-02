@@ -18,7 +18,7 @@ class JobListCreateView(generics.ListCreateAPIView):
         return Response(serializer.data)
 
 
-class JobUpdateView(generics.UpdateAPIView):
+class JobUpdateView(generics.RetrieveUpdateAPIView):
     # permission_classes = [permissions.IsAuthenticated & IsEmployer]
     serializer_class = JobSerializer
     queryset = Jobs.objects.all()

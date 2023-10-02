@@ -8,6 +8,6 @@ class ApplicationForm(models.Model):
     last_name = models.CharField(max_length=100)
     email = models.EmailField()
     phone = models.CharField(max_length=15)
-    qulification = models.TextField()
+    qualification = models.TextField()
     resume = models.FileField()
     status = models.BooleanField()

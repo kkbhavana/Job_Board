@@ -58,6 +58,9 @@ class LogoutView(APIView):
         return Response(status=status.HTTP_200_OK)
 
 
+
+
+
 class EmployerOnlyView(generics.RetrieveAPIView):
     permission_classes = [permissions.IsAuthenticated & IsEmployer]
     serializer_class = UserSerializer
